@@ -1,5 +1,9 @@
 Pollice::Application.routes.draw do
-  get "polls/new"
+  root :to => 'polls#new'
+  
+  resources :polls
+  
+  match "/edit/:encrypted_url", :to => "polls#edit"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,4 +1,4 @@
-<h1>Create a new poll</h1>
+<h1>Edit This Poll</h1>
 
 <%= form_for @poll do |f| %>
 	
@@ -11,3 +11,5 @@
 	<%= f.submit %>
 
 <% end %>
+
+<%= link_to "Delete Poll", poll_path(@poll), :method => :delete %>

@@ -9,6 +9,7 @@ group :test, :development do
   gem 'sqlite3'
 end
 
+gem 'annotate', '2.5.0', group: :development
 
 # Gems used only for assets and not required
 # in production environments by default.
