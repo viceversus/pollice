@@ -1,16 +1,6 @@
 <h1>Edit This Poll</h1>
 
-<%= form_for @poll do |f| %>
-	
-	<%= f.label :title %>
-	<%= f.text_field :title %>
-	
-	<%= f.label :name %>
-	<%= f.text_field :author %>
-	
-	<%= f.submit %>
-
-<% end %>
+<%= render :partial => 'poll_form' %>
 
 <%= link_to "Delete Poll", poll_path(@poll), :method => :delete %></br>
 

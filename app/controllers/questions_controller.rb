@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :find_resource, :except => [:new, :create]
+  
   def new
     @question = Question.new
   end
@@ -16,11 +18,9 @@ class QuestionsController < ApplicationController
   end
   
   def edit
-    @question = Question.find(params[:id])
   end
   
   def update
-    @question = Question.find(params[:id])
     if @question.update_attributes(params[:question])
       flash[:success] = "Question updated!"
       redirect_to poll_edit_path(@question.poll.encrypted_url)
@@ -31,7 +31,6 @@ class QuestionsController < ApplicationController
   end
   
   def destroy
-    @question = Question.find(params[:id])
     @poll = @question.poll
     if @question.destroy
       flash[:success] = "Question deleted!"
@@ -40,5 +39,8 @@ class QuestionsController < ApplicationController
       flash[:error] = "Could not delete question!"
       render 'edit'
     end
+  end
+  
+  def show
   end
 end

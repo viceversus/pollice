@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_filter :find_poll
+  before_filter :find_resource, :except => [:new, :create]
   
   def new
     @poll = Poll.new(params[:poll])
@@ -45,9 +45,4 @@ class PollsController < ApplicationController
       render 'edit'
     end
   end
-  
-  private
-    def find_poll
-      @poll = Poll.find(params[:id])
-    end
 end
