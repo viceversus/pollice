@@ -1,2 +1,12 @@
 <h1><%= @poll.title %></h1>
 <h3>By: <%= @poll.author %></h3>
+
+<h3>List of Questions</h3>
+<ul>
+	 <% @questions.each do |question| %>
+	<li>
+		<%= question.content %>
+		<%= link_to "Answer", '#' %>
+	</li>
+	<% end %>
+</ul>

@@ -12,4 +12,27 @@
 
 <% end %>
 
-<%= link_to "Delete Poll", poll_path(@poll), :method => :delete %>
+<%= link_to "Delete Poll", poll_path(@poll), :method => :delete %></br>
+
+<h3>Add a question</h3>
+<p>
+<%= form_for [@poll, @question] do |f| %>
+
+	<%= f.label :content %>
+	<%= f.text_field :content %>
+	
+	<%= f.submit %>
+
+<% end %>
+</p>
+
+<h3>List of Questions</h3>
+<ul>
+	<% @questions.each do |question| %>
+	<li>
+		<%= question.content %>
+		<%= link_to "Edit", edit_question_path(question) %>
+		<%= link_to "Delete", question_path(question), :method => :delete %>
+	</li>
+	<% end %>
+</ul>

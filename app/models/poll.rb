@@ -7,6 +7,8 @@ class Poll < ActiveRecord::Base
   validates_uniqueness_of     :encrypted_url
   
   after_create                :add_encrypted_url
+  
+  has_many                    :questions, :dependent => :destroy
 
   private
     def add_encrypted_url

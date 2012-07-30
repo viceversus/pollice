@@ -1,33 +1,32 @@
 class PollsController < ApplicationController
+  before_filter :find_poll
+  
   def new
     @poll = Poll.new(params[:poll])
   end
   
   def show
-    @poll = Poll.find(params[:id])
+    @questions = @poll.questions
   end
   
   def create
     @poll = Poll.new(params[:poll])
     if @poll.save
       flash[:success] = "Your poll has been created at #{root_url}#{@poll.id}! Use #{root_url}edit/#{@poll.encrypted_url} to edit!"
-      redirect_to root_path 
+      redirect_to root_path
     else
       flash[:error] = "Title and author are required."
       render 'new'
     end
   end
   
-  def show
-    @poll = Poll.find(params[:id])
-  end
-  
   def edit
     @poll = Poll.find_by_encrypted_url(params[:encrypted_url])
+    @questions = @poll.questions
+    @question = Question.new
   end
   
   def update
-    @poll = Poll.find(params[:id])
     if @poll.update_attributes(:title => params[:poll][:title], :author => params[:poll][:author])
       flash[:success] = "Your poll (#{root_url}#{@poll.id}) has been updated!"
       redirect_to poll_path(@poll)
@@ -38,7 +37,6 @@ class PollsController < ApplicationController
   end
   
   def destroy
-    @poll = Poll.find(params[:id])
     if @poll.destroy
       flash[:success] = "Your poll has been deleted!"
       redirect_to root_path
@@ -47,4 +45,9 @@ class PollsController < ApplicationController
       render 'edit'
     end
   end
+  
+  private
+    def find_poll
+      @poll = Poll.find(params[:id])
+    end
 end

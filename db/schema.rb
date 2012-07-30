@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730181846) do
+ActiveRecord::Schema.define(:version => 20120730200249) do
 
   create_table "polls", :force => true do |t|
     t.string   "author"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(:version => 20120730181846) do
     t.string   "encrypted_url"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "poll_id"
   end
 
 end
