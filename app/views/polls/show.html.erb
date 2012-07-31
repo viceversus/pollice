@@ -6,7 +6,16 @@
 	 <% @questions.each do |question| %>
 	<li>
 		<%= question.content %>
-		<%= link_to "Answer", question_path(question) %>
 	</li>
+	<% end %>
+</ul>
+
+<p><%= link_to "Add new response", new_poll_response_path(@poll) %></p>
+<h3>List of Responses</h3>
+<ul>
+	<% @responses.each do |response| %>
+		<li>
+			<%= link_to response.responder, response_path(response) %>
+		</li>
 	<% end %>
 </ul>

@@ -1,2 +1,23 @@
-<h1>Responses#new</h1>
-<p>Find me in app/views/responses/new.html.erb</p>
+<h1><%= @poll.title %></h1>
+
+<%= form_for [@poll, @response] do |f| %>
+	<p>
+		<%= f.label :name %>
+		<%= f.text_field :responder %>
+	</p>
+	
+	<% @poll.questions.each do |question| %>
+		<h3><%= question.content %></h3>
+		
+		<%= f.fields_for :answers do |builder| %>
+			<p>
+			<%= builder.label :answer %>
+			<%= builder.text_area :body, :rows => 3 %>
+			
+			<%= builder.hidden_field :question_id, { :value => question.id } %>
+			</p>
+		<% end %>
+	<% end %>
+	
+	<p><%= f.submit "Submit" %></p>
+<% end %>

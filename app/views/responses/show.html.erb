@@ -1,0 +1,6 @@
+<h1><%= @response.responder %>'s Answers for <%= @poll.title %></h1>
+
+<% @response.answers.each do |answer| %>
+	<h3><%= answer.question.content %></h3>
+	<p><%= answer.body %></p>
+<% end %>

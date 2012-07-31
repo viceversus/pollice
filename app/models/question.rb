@@ -1,8 +1,8 @@
 class Question < ActiveRecord::Base
-  attr_accessible           :content
+  attr_accessible           :content, :poll
   
   validates_presence_of     :content, :poll
   
   belongs_to                :poll
-  has_many                  :responses, :dependent => :destroy
+  has_many                  :answers, :dependent => :destroy
 end

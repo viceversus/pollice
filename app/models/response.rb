@@ -1,18 +1,10 @@
 class Response < ActiveRecord::Base
-  attr_accessible         :body, :poll_id, :question_id, :responder
+  attr_accessible                 :responder, :answers_attributes, :poll
   
-  validates_presence_of   :poll_id, :question, :responder, :body
+  validates_presence_of           :poll, :responder
   
-  belongs_to              :question
+  belongs_to                      :poll
+  has_many                        :answers, :dependent => :destroy, :inverse_of => :response
   
-  before_validation       :set_poll_id
-  
-  def poll
-    question.poll
-  end
-  
-  private
-    def set_poll_id
-      self.poll_id = question.poll_id
-    end
+  accepts_nested_attributes_for   :answers
 end

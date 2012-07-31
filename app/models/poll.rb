@@ -9,6 +9,7 @@ class Poll < ActiveRecord::Base
   after_create                :add_encrypted_url
   
   has_many                    :questions, :dependent => :destroy
+  has_many                    :responses, :dependent => :destroy
 
   private
     def add_encrypted_url
