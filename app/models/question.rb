@@ -3,6 +3,6 @@ class Question < ActiveRecord::Base
   
   validates_presence_of     :content, :poll
   
-  belongs_to                :poll
+  belongs_to                :poll, :inverse_of => :questions
   has_many                  :answers, :dependent => :destroy
 end

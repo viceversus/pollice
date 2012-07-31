@@ -1,3 +1,21 @@
 <h1>Create a new poll</h1>
 
-<%= render :partial => 'poll_form' %>
+<%= form_for @poll do |f| %>
+	
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	
+	<%= f.label :name %>
+	<%= f.text_field :author %>
+	
+	<%= f.fields_for :questions do |builder| %>
+		<p>
+		<%= builder.label :question %>
+		<%= builder.text_field :content %>
+		</p>
+	<% end %>
+	
+	<%= f.submit %>
+
+<% end %>
+

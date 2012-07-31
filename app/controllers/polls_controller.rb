@@ -3,6 +3,7 @@ class PollsController < ApplicationController
   
   def new
     @poll = Poll.new(params[:poll])
+    3.times { @poll.questions.build }
   end
   
   def show
@@ -13,7 +14,7 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(params[:poll])
     if @poll.save
-      flash[:success] = "Your poll has been created at #{root_url}#{@poll.id}! Use #{root_url}#{@poll.encrypted_url} to edit!"
+      flash[:success] = "Your poll has been created at #{root_url}/polls/#{@poll.id}! Use #{root_url}#{@poll.encrypted_url} to edit!"
       redirect_to poll_edit_path(@poll.encrypted_url)
     else
       flash[:error] = "Title and author are required."
