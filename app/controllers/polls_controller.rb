@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_filter :find_resource, :except => [:new, :create]
+  before_filter :find_resource, :except => [:new, :create, :edit]
   
   def new
     @poll = Poll.new(params[:poll])
@@ -13,7 +13,7 @@ class PollsController < ApplicationController
     @poll = Poll.new(params[:poll])
     if @poll.save
       flash[:success] = "Your poll has been created at #{root_url}#{@poll.id}! Use #{root_url}edit/#{@poll.encrypted_url} to edit!"
-      redirect_to root_path
+      redirect_to poll_edit_path(@poll.encrypted_url)
     else
       flash[:error] = "Title and author are required."
       render 'new'
@@ -29,7 +29,7 @@ class PollsController < ApplicationController
   def update
     if @poll.update_attributes(:title => params[:poll][:title], :author => params[:poll][:author])
       flash[:success] = "Your poll (#{root_url}#{@poll.id}) has been updated!"
-      redirect_to poll_path(@poll)
+      redirect_to poll_edit_path(@poll.encrypted_url)
     else
       flash[:error] = "Error in updating your poll."
       render 'edit'

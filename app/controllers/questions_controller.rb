@@ -42,5 +42,7 @@ class QuestionsController < ApplicationController
   end
   
   def show
+    @response = Response.new
+    @responses = @question.responses
   end
 end

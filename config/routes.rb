@@ -1,11 +1,17 @@
 Pollice::Application.routes.draw do
+  get "responses/new"
+
+  get "responses/create"
+
   root :to => 'polls#new'
   
   resources :polls do
-    resources :questions, :except => [:index]
+    resources :questions, :only => [:create]
   end
   
-  resources :questions, :only => [:edit, :update, :destroy]
+  resources :questions, :only => [:show, :edit, :update, :destroy] do
+    resources :responses, :only => [:create]
+  end
   
   match "/edit/:encrypted_url", :to => "polls#edit", :as => 'poll_edit'
 

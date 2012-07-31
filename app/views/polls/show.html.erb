@@ -6,7 +6,7 @@
 	 <% @questions.each do |question| %>
 	<li>
 		<%= question.content %>
-		<%= link_to "Answer", '#' %>
+		<%= link_to "Answer", question_path(question) %>
 	</li>
 	<% end %>
 </ul>

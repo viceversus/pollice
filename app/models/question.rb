@@ -4,4 +4,5 @@ class Question < ActiveRecord::Base
   validates_presence_of     :content, :poll
   
   belongs_to                :poll
+  has_many                  :responses, :dependent => :destroy
 end
