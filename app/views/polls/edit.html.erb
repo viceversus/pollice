@@ -2,6 +2,7 @@
 
 <%= render :partial => 'poll_form' %>
 
+<%= link_to "View Poll", poll_path(@poll) %>
 <%= link_to "Delete Poll", poll_path(@poll), :method => :delete %></br>
 
 <h3>Add a question</h3>
